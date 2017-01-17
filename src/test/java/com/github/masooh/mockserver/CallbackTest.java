@@ -120,7 +120,7 @@ public class CallbackTest {
         }
 
         public HttpResponse handle(HttpRequest httpRequest) {
-            if (httpRequest.getMethod().getValue().equalsIgnoreCase("post")) {
+            if ("post".equalsIgnoreCase(httpRequest.getMethod().getValue())) {
                 if (state == State.TWO) {
                     return conflict;
                 }

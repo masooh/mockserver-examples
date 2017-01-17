@@ -24,7 +24,7 @@ public class FilterExpectationEncoder<E> extends EncoderBase<E> {
         ILoggingEvent loggingEvent = (ILoggingEvent) event;
         ExpectationDTO expectationDTO = objectMapper.readValue(loggingEvent.getMessage(), ExpectationDTO.class);
 
-        final HttpRequestDTO httpRequest = expectationDTO.getHttpRequest();
+        HttpRequestDTO httpRequest = expectationDTO.getHttpRequest();
         if (excludeRequestHeaders) {
             httpRequest.getHeaders().clear();
         }
@@ -32,7 +32,7 @@ public class FilterExpectationEncoder<E> extends EncoderBase<E> {
             httpRequest.getCookies().clear();
         }
 
-        final HttpResponseDTO httpResponse = expectationDTO.getHttpResponse();
+        HttpResponseDTO httpResponse = expectationDTO.getHttpResponse();
         if (excludeResponseHeaders) {
             httpResponse.getHeaders().clear();
         }
@@ -40,13 +40,13 @@ public class FilterExpectationEncoder<E> extends EncoderBase<E> {
             httpResponse.getCookies().clear();
         }
 
-        final String json = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(expectationDTO);
+        String json = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(expectationDTO);
         outputStream.write(json.getBytes());
         outputStream.flush();
     }
 
     public void close() throws IOException {
-
+        // nothing to do
     }
 
     // The following methods are for binding encoder config of logback.xml
